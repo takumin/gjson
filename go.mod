@@ -1,4 +1,4 @@
-module github.com/takumin/boilerplate-golang-cli
+module github.com/takumin/gjson
 
 go 1.19
 

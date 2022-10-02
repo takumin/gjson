@@ -1,8 +1,8 @@
 # https://rust-lang.github.io/mdBook/
 
 [book]
-title = "boilerplate-golang-cli"
-description = "Boilerplate Golang CLI Tool"
+title = "gjson"
+description = "Golang JSON Tool"
 authors = ["takumin"]
 src = "docs"
 language = "ja"
@@ -13,4 +13,4 @@ build-dir = "book"
 create-missing = false
 
 [output.html]
-git-repository-url = "https://github.com/takumin/boilerplate-golang-cli"
+git-repository-url = "https://github.com/takumin/gjson"

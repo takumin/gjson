@@ -3,11 +3,11 @@ package completion
 import (
 	"github.com/urfave/cli/v2"
 
-	"github.com/takumin/boilerplate-golang-cli/internal/command/completion/bash"
-	"github.com/takumin/boilerplate-golang-cli/internal/command/completion/fish"
-	"github.com/takumin/boilerplate-golang-cli/internal/command/completion/powershell"
-	"github.com/takumin/boilerplate-golang-cli/internal/command/completion/zsh"
-	"github.com/takumin/boilerplate-golang-cli/internal/config"
+	"github.com/takumin/gjson/internal/command/completion/bash"
+	"github.com/takumin/gjson/internal/command/completion/fish"
+	"github.com/takumin/gjson/internal/command/completion/powershell"
+	"github.com/takumin/gjson/internal/command/completion/zsh"
+	"github.com/takumin/gjson/internal/config"
 )
 
 func NewCommands(cfg *config.Config, flags []cli.Flag) *cli.Command {

@@ -3,7 +3,7 @@ package subcommand
 import (
 	"github.com/urfave/cli/v2"
 
-	"github.com/takumin/boilerplate-golang-cli/internal/config"
+	"github.com/takumin/gjson/internal/config"
 )
 
 func NewCommands(cfg *config.Config, flags []cli.Flag) *cli.Command {
