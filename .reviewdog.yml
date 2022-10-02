@@ -9,6 +9,9 @@ runner:
     cmd: yamllint --format parsable .
     errorformat:
     - '%f:%l:%c: %m'
+  gjson-validate:
+    cmd: gjson validate .
+    format: rdjsonl
   actionlint:
     cmd: actionlint -oneline
     errorformat:
