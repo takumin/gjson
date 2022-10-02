@@ -25,3 +25,19 @@ GLOBAL OPTIONS:
    --log-level value, -l value  log level [$LOG_LEVEL]
    --version, -v                print the version (default: false)
 ```
+
+# validate
+
+```
+NAME:
+   gjson validation - validation json files
+
+USAGE:
+   gjson validation [command options] [arguments...]
+
+OPTIONS:
+   --directory value, -d value  search base directory (default: ".") [$DIRECTORY]
+   --excludes value, -e value  exclude files extensions (default: "invalid.json.golden") [$EXCLUDES]
+   --includes value, -i value  include files extensions (default: "json,json.golden") [$INCLUDES]
+   --log-level value, -l value  log level [$LOG_LEVEL]
+```
