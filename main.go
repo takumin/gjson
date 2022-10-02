@@ -8,7 +8,7 @@ import (
 	"github.com/urfave/cli/v2"
 
 	"github.com/takumin/gjson/internal/command/completion"
-	"github.com/takumin/gjson/internal/command/subcommand"
+	"github.com/takumin/gjson/internal/command/validation"
 	"github.com/takumin/gjson/internal/config"
 )
 
@@ -20,7 +20,11 @@ var (
 )
 
 func main() {
-	cfg := config.NewConfig()
+	cfg := config.NewConfig(
+		config.Directory("."),
+		config.Includes("json,json.golden"),
+		config.Excludes("invalid.json.golden"),
+	)
 
 	flags := []cli.Flag{
 		&cli.StringFlag{
@@ -35,7 +39,7 @@ func main() {
 
 	cmds := []*cli.Command{
 		completion.NewCommands(cfg, flags),
-		subcommand.NewCommands(cfg, flags),
+		validation.NewCommands(cfg, flags),
 	}
 
 	app := &cli.App{

@@ -2,7 +2,16 @@ package config
 
 type Config struct {
 	LogLevel string
-	Variable string
+
+	Path struct {
+		File      string
+		Directory string
+	}
+
+	Extention struct {
+		Includes string
+		Excludes string
+	}
 }
 
 func NewConfig(opts ...Option) *Config {
