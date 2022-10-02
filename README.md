@@ -3,7 +3,7 @@ Golang JSON Tool
 
 [![CI](https://github.com/takumin/gjson/actions/workflows/integration.yml/badge.svg)](https://github.com/takumin/gjson/actions/workflows/integration.yml)
 
-# usage
+## usage
 
 ```
 NAME:
@@ -26,7 +26,7 @@ GLOBAL OPTIONS:
    --version, -v                print the version (default: false)
 ```
 
-# validate
+## validate
 
 ```
 NAME:
