@@ -13,11 +13,11 @@ USAGE:
    gjson [global options] command [command options] [arguments...]
 
 VERSION:
-   dev (e8cfcb31a9b6ea2b95e17cac42a608fd4a6afa3e)
+   dev (a39580b79e5739d9872728be106d5c051f8ed51f)
 
 COMMANDS:
    completion                      command completion
-   validation, validate, valid, v  validation json files
+   validation, validate, valid, v  json file validation
    help, h                         Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:

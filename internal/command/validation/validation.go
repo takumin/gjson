@@ -42,7 +42,7 @@ func NewCommands(cfg *config.Config, flags []cli.Flag) *cli.Command {
 	return &cli.Command{
 		Name:    "validation",
 		Aliases: []string{"validate", "valid", "v"},
-		Usage:   "validation json files",
+		Usage:   "json file validation",
 		Flags:   flags,
 		Action:  action(cfg),
 	}
