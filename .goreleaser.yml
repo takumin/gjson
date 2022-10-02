@@ -20,8 +20,6 @@ builds:
   - -X main.Version={{ .Version }}
   - -X main.Revision={{ .FullCommit }}
   - -extldflags -static
-universal_binaries:
-- replace: true
 archives:
 - name_template: '{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
   format_overrides:
