@@ -1,0 +1,16 @@
+# https://rust-lang.github.io/mdBook/
+
+[book]
+title = "boilerplate-golang-cli"
+description = "Boilerplate Golang CLI Tool"
+authors = ["takumin"]
+src = "docs"
+language = "ja"
+multilingual = false
+
+[build]
+build-dir = "book"
+create-missing = false
+
+[output.html]
+git-repository-url = "https://github.com/takumin/boilerplate-golang-cli"

@@ -1,0 +1,18 @@
+---
+# aqua - Declarative CLI Version Manager
+# https://aquaproj.github.io/
+registries:
+- type: standard
+  ref: v3.65.0 # renovate: depName=aquaproj/aqua-registry
+
+packages:
+- name: dominikh/go-tools/staticcheck@2022.1
+- name: goreleaser/goreleaser@v1.11.4
+- name: securego/gosec@v2.13.1
+- name: reviewdog/reviewdog@v0.14.1
+- name: mvdan/sh@v3.5.1
+- name: koalaman/shellcheck@v0.8.0
+- name: rhysd/actionlint@v1.6.20
+- name: rust-lang/mdBook@v0.4.21
+- name: golang/vuln/govulncheck
+  version: 485fff3f2c84d78d2c259d17fbf0d8bb3625ea0b
