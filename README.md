@@ -30,7 +30,7 @@ GLOBAL OPTIONS:
 
 ```
 NAME:
-   gjson validation - validation json files
+   gjson validation - json file validation
 
 USAGE:
    gjson validation [command options] [arguments...]
