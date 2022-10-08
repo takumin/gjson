@@ -1,6 +1,6 @@
-APPNAME   := $(shell basename $(CURDIR))
-VERSION   := $(shell git describe --abbrev=0 --tags 2>/dev/null)
-REVISION  := $(shell git rev-parse HEAD 2>/dev/null)
+APPNAME  := $(shell basename $(CURDIR))
+VERSION  := $(shell git describe --abbrev=0 --tags 2>/dev/null)
+REVISION := $(shell git rev-parse HEAD 2>/dev/null)
 
 ifeq ($(VERSION),)
 VERSION := dev
@@ -60,8 +60,8 @@ test:
 	CGO_ENABLED=0 go test ./...
 
 .PHONY: build
-build: bin/$(BINNAME)
-bin/$(BINNAME): $(SRCS)
+build: bin/$(APPNAME)
+bin/$(APPNAME): $(SRCS)
 	CGO_ENABLED=0 go build $(BUILDFLAGS) -o $@
 
 .PHONY: install
