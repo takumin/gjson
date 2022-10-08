@@ -16,6 +16,9 @@ jobs:
   reviewdog-actionlint:
     name: Reviewdog (actionlint)
     uses: ./.github/workflows/reviewdog-actionlint.yml
+  reviewdog-gjson-validate:
+    name: Reviewdog (gjson-validate)
+    uses: ./.github/workflows/reviewdog-gjson-validate.yml
   reviewdog-gofmt:
     name: Reviewdog (gofmt)
     uses: ./.github/workflows/reviewdog-gofmt.yml

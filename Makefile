@@ -49,7 +49,7 @@ sec:
 
 .PHONY: vuln
 vuln:
-	govulncheck ./...
+	trivy fs -q -s HIGH,CRITICAL --security-checks vuln,config,secret,license .
 
 .PHONY: lint
 lint:
