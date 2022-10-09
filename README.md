@@ -2,6 +2,7 @@
 Golang JSON Tool
 
 [![CI](https://github.com/takumin/gjson/actions/workflows/integration.yml/badge.svg)](https://github.com/takumin/gjson/actions/workflows/integration.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/takumin/gjson)](https://goreportcard.com/report/github.com/takumin/gjson)
 
 ## usage
 
