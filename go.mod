@@ -2,7 +2,7 @@ module github.com/takumin/gjson
 
 go 1.19
 
-require github.com/urfave/cli/v2 v2.17.1
+require github.com/urfave/cli/v2 v2.19.1
 
 require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
