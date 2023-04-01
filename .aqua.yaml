@@ -15,4 +15,4 @@ packages:
 - name: rhysd/actionlint@v1.6.23
 - name: rust-lang/mdBook@v0.4.28
 - name: takumin/gjson@v0.0.2
-- name: aquasecurity/trivy@v0.38.3
+- name: aquasecurity/trivy@v0.39.0
