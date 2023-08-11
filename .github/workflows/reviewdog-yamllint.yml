@@ -9,7 +9,6 @@ on:
     - '.github/actions/setup-reviewdog/action.yaml'
     - '.github/dependency/.python-version'
     - '.github/dependency/requirements.txt'
-    - '.github/dependency/actions-cache-version'
     - '.github/workflows/reviewdog-yamllint.yml'
     - '.aqua.yaml'
     - '.reviewdog.yml'
