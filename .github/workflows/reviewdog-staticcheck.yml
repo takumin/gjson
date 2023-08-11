@@ -6,7 +6,6 @@ on:
     - '.github/actions/setup-go/action.yaml'
     - '.github/actions/setup-aqua/action.yaml'
     - '.github/actions/setup-reviewdog/action.yaml'
-    - '.github/dependency/actions-cache-version'
     - '.github/workflows/reviewdog-staticcheck.yml'
     - '.aqua.yaml'
     - '.reviewdog.yml'
