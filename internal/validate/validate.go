@@ -79,73 +79,54 @@ func getPosition(file string, offset int) (pos *position, err error) {
 	return pos, nil
 }
 
-func Validate(filelist []string) ([]string, error) {
-	errfiles := make([]string, 0, 1024)
-	for _, v := range filelist {
-		data, err := os.ReadFile(filepath.Clean(v))
-		if err != nil {
+func Validate(file string) ([]byte, error) {
+	data, err := os.ReadFile(filepath.Clean(file))
+	if err != nil {
+		return nil, err
+	}
+	if json.Valid(data) {
+		return nil, nil
+	}
+
+	var offset int64
+	var errjson error
+	var val struct{}
+	if err := json.Unmarshal(data, &val); err != nil {
+		switch err := err.(type) {
+		case *json.UnmarshalTypeError:
+			offset = err.Offset
+			errjson = err
+		case *json.SyntaxError:
+			offset = err.Offset
+			errjson = err
+		default:
 			return nil, err
-		}
-		if !json.Valid(data) {
-			errfiles = append(errfiles, v)
 		}
 	}
 
-	valid := true
-	result := make([]string, 0, 1024)
-	for _, file := range errfiles {
-		data, err := os.ReadFile(filepath.Clean(file))
-		if err != nil {
-			return nil, err
-		}
+	pos, err := getPosition(file, int(offset))
+	if err != nil {
+		return nil, err
+	}
 
-		var offset int64
-		var errjson error
-		var val struct{}
-		if err := json.Unmarshal(data, &val); err != nil {
-			switch err := err.(type) {
-			case *json.UnmarshalTypeError:
-				offset = err.Offset
-				errjson = err
-			case *json.SyntaxError:
-				offset = err.Offset
-				errjson = err
-			default:
-				return nil, err
-			}
-		}
-
-		pos, err := getPosition(file, int(offset))
-		if err != nil {
-			return nil, err
-		}
-
-		rdjsonl := rdjsonl{
-			Message: errjson.Error(),
-			Location: &rdjsonlLocation{
-				Path: file,
-				Range: &rdjsonlRange{
-					Start: &rdjsonlPosition{
-						Line:   pos.Line,
-						Column: pos.Column,
-					},
+	rdjsonl := rdjsonl{
+		Message: errjson.Error(),
+		Location: &rdjsonlLocation{
+			Path: file,
+			Range: &rdjsonlRange{
+				Start: &rdjsonlPosition{
+					Line:   pos.Line,
+					Column: pos.Column,
 				},
 			},
-			Severity: "ERROR",
-		}
-
-		buf, err := json.Marshal(rdjsonl)
-		if err != nil {
-			return nil, err
-		}
-
-		result = append(result, string(buf))
-		valid = false
+		},
+		Severity: "ERROR",
 	}
 
-	if !valid {
-		return result, fmt.Errorf("invalid json")
+	buf, err := json.Marshal(rdjsonl)
+	if err != nil {
+		return nil, err
 	}
 
-	return nil, nil
+	return buf, nil
 }
