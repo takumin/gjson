@@ -5,6 +5,7 @@ import (
 	"os"
 	"slices"
 	"sort"
+	"strings"
 
 	"github.com/urfave/cli/v2"
 
@@ -62,7 +63,6 @@ func before(cfg *config.Config) func(ctx *cli.Context) error {
 func action(cfg *config.Config) func(ctx *cli.Context) error {
 	return func(ctx *cli.Context) error {
 		paths := make([]string, 0, 65535)
-
 		for _, path := range cfg.Path.Searches {
 			list, err := filelist.Filelist(
 				os.DirFS(path),
@@ -78,11 +78,20 @@ func action(cfg *config.Config) func(ctx *cli.Context) error {
 			}
 		}
 
-		// TODO: refactoring
-		if res, err := validate.Validate(paths); err != nil {
-			for _, v := range res {
-				fmt.Fprintln(os.Stderr, v)
+		var buf strings.Builder
+		for _, path := range paths {
+			res, err := validate.Validate(path)
+			if err != nil {
+				return err
 			}
+			if res != nil {
+				buf.Write(res)
+				buf.WriteString("\n")
+			}
+		}
+
+		if buf.Len() > 0 {
+			fmt.Print(buf.String())
 			os.Exit(2)
 		}
 
