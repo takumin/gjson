@@ -10,6 +10,8 @@ ifeq ($(REVISION),)
 REVISION := unknown
 endif
 
+SRCS := $(shell find . -type f -name '*.go')
+
 LDFLAGS_APPNAME  := -X "main.AppName=$(APPNAME)"
 LDFLAGS_VERSION  := -X "main.Version=$(VERSION)"
 LDFLAGS_REVISION := -X "main.Revision=$(REVISION)"
