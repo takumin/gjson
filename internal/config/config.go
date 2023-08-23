@@ -4,7 +4,6 @@ type Config struct {
 	LogLevel string
 
 	Path struct {
-		RootDir  string
 		Searches []string
 	}
 

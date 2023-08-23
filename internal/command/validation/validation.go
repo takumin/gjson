@@ -66,7 +66,7 @@ func action(cfg *config.Config) func(ctx *cli.Context) error {
 		for _, path := range cfg.Path.Searches {
 			list, err := filelist.Filelist(
 				os.DirFS(path),
-				cfg.Path.RootDir,
+				path,
 				cfg.Extention.Includes,
 				cfg.Extention.Excludes,
 			)
