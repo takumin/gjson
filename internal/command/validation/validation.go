@@ -64,17 +64,26 @@ func action(cfg *config.Config) func(ctx *cli.Context) error {
 	return func(ctx *cli.Context) error {
 		paths := make([]string, 0, 65535)
 		for _, path := range cfg.Path.Searches {
-			list, err := filelist.Filelist(
-				os.DirFS(path),
-				path,
-				cfg.Extention.Includes,
-				cfg.Extention.Excludes,
-			)
+			info, err := os.Stat(path)
 			if err != nil {
 				return err
 			}
-			if len(list) > 0 {
-				paths = append(paths, list...)
+
+			if info.IsDir() {
+				list, err := filelist.Filelist(
+					os.DirFS(path),
+					path,
+					cfg.Extention.Includes,
+					cfg.Extention.Excludes,
+				)
+				if err != nil {
+					return err
+				}
+				if len(list) > 0 {
+					paths = append(paths, list...)
+				}
+			} else {
+				paths = append(paths, path)
 			}
 		}
 
