@@ -25,11 +25,11 @@ func (o SearchPath) Apply(c *Config) {
 type Includes string
 
 func (o Includes) Apply(c *Config) {
-	c.Extention.Includes = string(o)
+	c.Extention.Includes = append(c.Extention.Includes, string(o))
 }
 
 type Excludes string
 
 func (o Excludes) Apply(c *Config) {
-	c.Extention.Excludes = string(o)
+	c.Extention.Excludes = append(c.Extention.Excludes, string(o))
 }
