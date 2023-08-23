@@ -16,3 +16,4 @@ packages:
 - name: rust-lang/mdBook@v0.4.34
 - name: takumin/gjson@v0.0.2
 - name: aquasecurity/trivy@v0.44.1
+- name: takumin/gyaml@v0.0.2
