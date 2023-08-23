@@ -1,3 +1,5 @@
 /bin/
 /dist/
 /book/
+coverage.html
+coverage.out

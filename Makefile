@@ -59,7 +59,14 @@ lint:
 
 .PHONY: test
 test:
-	CGO_ENABLED=0 go test ./...
+	go test -trimpath -cover -covermode atomic ./...
+
+.PHONY: coverage
+coverage: coverage.out coverage.html
+coverage.out: $(SRCS)
+	go test -trimpath -cover -covermode atomic -coverprofile coverage.out ./...
+coverage.html: coverage.out
+	go tool cover -html coverage.out -o coverage.html
 
 .PHONY: build
 build: bin/$(APPNAME)
@@ -85,3 +92,5 @@ clean:
 	rm -rf bin
 	rm -rf dist
 	rm -rf book
+	rm -f coverage.out
+	rm -f coverage.html
