@@ -4,8 +4,8 @@ type Config struct {
 	LogLevel string
 
 	Path struct {
-		File      string
-		Directory string
+		RootDir  string
+		Searches []string
 	}
 
 	Extention struct {
