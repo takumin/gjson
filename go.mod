@@ -1,6 +1,6 @@
 module github.com/takumin/gjson
 
-go 1.19
+go 1.21.0
 
 require github.com/urfave/cli/v2 v2.25.7
 
