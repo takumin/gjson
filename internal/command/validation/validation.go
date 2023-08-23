@@ -3,6 +3,8 @@ package validation
 import (
 	"fmt"
 	"os"
+	"slices"
+	"sort"
 	"strings"
 
 	"github.com/urfave/cli/v2"
@@ -14,14 +16,6 @@ import (
 
 func NewCommands(cfg *config.Config, flags []cli.Flag) *cli.Command {
 	flags = append(flags, []cli.Flag{
-		&cli.StringFlag{
-			Name:        "directory",
-			Aliases:     []string{"d"},
-			Usage:       "search base directory",
-			EnvVars:     []string{"DIRECTORY"},
-			Value:       cfg.Path.Directory,
-			Destination: &cfg.Path.Directory,
-		},
 		&cli.StringFlag{
 			Name:        "includes",
 			Aliases:     []string{"i"},
@@ -40,32 +34,49 @@ func NewCommands(cfg *config.Config, flags []cli.Flag) *cli.Command {
 		},
 	}...)
 	return &cli.Command{
-		Name:    "validation",
-		Aliases: []string{"validate", "valid", "v"},
-		Usage:   "json file validation",
-		Flags:   flags,
-		Action:  action(cfg),
+		Name:            "validation",
+		Aliases:         []string{"validate", "valid", "v"},
+		Usage:           "json file validation",
+		ArgsUsage:       "[file or directory...]",
+		HideHelpCommand: true,
+		Flags:           flags,
+		Before:          before(cfg),
+		Action:          action(cfg),
+	}
+}
+
+func before(cfg *config.Config) func(ctx *cli.Context) error {
+	return func(ctx *cli.Context) error {
+		if ctx.NArg() > 0 {
+			s := ctx.Args().Slice()
+			sort.Strings(s)
+			cfg.Path.Searches = slices.Compact(s)
+		}
+		return nil
 	}
 }
 
 func action(cfg *config.Config) func(ctx *cli.Context) error {
 	return func(ctx *cli.Context) error {
-		if ctx.Args().Len() == 1 {
-			cfg.Path.Directory = ctx.Args().First()
-		}
+		paths := make([]string, 0, 65535)
 
-		list, err := filelist.Filelist(
-			os.DirFS(cfg.Path.Directory),
-			cfg.Path.Directory,
-			strings.Split(cfg.Extention.Includes, ","),
-			strings.Split(cfg.Extention.Excludes, ","),
-		)
-		if err != nil {
-			return err
+		for _, path := range cfg.Path.Searches {
+			list, err := filelist.Filelist(
+				os.DirFS(path),
+				cfg.Path.RootDir,
+				strings.Split(cfg.Extention.Includes, ","),
+				strings.Split(cfg.Extention.Excludes, ","),
+			)
+			if err != nil {
+				return err
+			}
+			if len(list) > 0 {
+				paths = append(paths, list...)
+			}
 		}
 
 		// TODO: refactoring
-		if res, err := validate.Validate(list); err != nil {
+		if res, err := validate.Validate(paths); err != nil {
 			for _, v := range res {
 				fmt.Fprintln(os.Stderr, v)
 			}

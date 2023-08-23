@@ -21,7 +21,8 @@ var (
 
 func main() {
 	cfg := config.NewConfig(
-		config.Directory("."),
+		config.RootDir("."),
+		config.SearchPath("."),
 		config.Includes("json,json.golden"),
 		config.Excludes("invalid.json.golden"),
 	)
