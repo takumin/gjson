@@ -9,8 +9,8 @@ type Config struct {
 	}
 
 	Extention struct {
-		Includes string
-		Excludes string
+		Includes []string
+		Excludes []string
 	}
 }
 
