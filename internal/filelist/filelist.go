@@ -1,15 +1,19 @@
 package filelist
 
 import (
-	"fmt"
 	"io/fs"
 	"path/filepath"
+
+	"github.com/bmatcuk/doublestar/v4"
 )
 
 func Filelist(fsys fs.FS, root string, includes, excludes []string) ([]string, error) {
 	list := make([]string, 0, 65536)
+	root = filepath.Clean(root)
 
-	err := fs.WalkDir(fsys, root, func(path string, d fs.DirEntry, err error) error {
+	err := fs.WalkDir(fsys, ".", func(path string, d fs.DirEntry, err error) error {
+		path = filepath.Clean(path)
+
 		if err != nil {
 			return err
 		}
@@ -19,7 +23,7 @@ func Filelist(fsys fs.FS, root string, includes, excludes []string) ([]string, e
 		}
 
 		for _, v := range excludes {
-			matched, err := filepath.Match(fmt.Sprintf("*.%s", v), filepath.Base(path))
+			matched, err := doublestar.PathMatch(v, path)
 			if err != nil {
 				return err
 			}
@@ -29,12 +33,12 @@ func Filelist(fsys fs.FS, root string, includes, excludes []string) ([]string, e
 		}
 
 		for _, v := range includes {
-			matched, err := filepath.Match(fmt.Sprintf("*.%s", v), filepath.Base(path))
+			matched, err := doublestar.PathMatch(v, path)
 			if err != nil {
 				return err
 			}
 			if matched {
-				list = append(list, path)
+				list = append(list, filepath.Join(root, path))
 				return nil
 			}
 		}

@@ -10,12 +10,6 @@ func (o LogLevel) Apply(c *Config) {
 	c.LogLevel = string(o)
 }
 
-type RootDir string
-
-func (o RootDir) Apply(c *Config) {
-	c.Path.RootDir = string(o)
-}
-
 type SearchPath string
 
 func (o SearchPath) Apply(c *Config) {

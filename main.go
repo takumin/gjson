@@ -21,12 +21,11 @@ var (
 
 func main() {
 	cfg := config.NewConfig(
-		config.RootDir("."),
 		config.SearchPath("."),
-		config.Includes("json"),
-		config.Includes("json.golden"),
-		config.Excludes("invalid.json"),
-		config.Excludes("invalid.json.golden"),
+		config.Includes("**/*.json"),
+		config.Includes("**/*.json.golden"),
+		config.Excludes("**/*.invalid.json"),
+		config.Excludes("**/*.invalid.json.golden"),
 	)
 
 	flags := []cli.Flag{

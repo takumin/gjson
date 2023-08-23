@@ -34,15 +34,15 @@ func TestFilelist(t *testing.T) {
 		{
 			name:     "Include go, Exclude None",
 			root:     ".",
-			includes: []string{"go"},
+			includes: []string{"**/*.go"},
 			excludes: []string{},
 			want:     []string{"test.go", "foo/test.go", "foo/bar/test.go"},
 		},
 		{
 			name:     "Include txt, Exclude exc.txt",
 			root:     ".",
-			includes: []string{"txt"},
-			excludes: []string{"exc.txt"},
+			includes: []string{"**/*.txt"},
+			excludes: []string{"**/*.exc.txt"},
 			want:     []string{"test.txt", "test.inc.txt", "foo/test.txt", "foo/test.inc.txt", "foo/bar/test.txt", "foo/bar/test.inc.txt"},
 		},
 	}
