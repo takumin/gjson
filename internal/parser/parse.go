@@ -1,4 +1,4 @@
-package validate
+package parser
 
 import (
 	"bufio"
@@ -79,7 +79,7 @@ func getPosition(file string, offset int) (pos *position, err error) {
 	return pos, nil
 }
 
-func Validate(file string) ([]byte, error) {
+func Parse(file string) ([]byte, error) {
 	data, err := os.ReadFile(filepath.Clean(file))
 	if err != nil {
 		return nil, err

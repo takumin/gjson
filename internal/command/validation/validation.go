@@ -11,7 +11,7 @@ import (
 
 	"github.com/takumin/gjson/internal/config"
 	"github.com/takumin/gjson/internal/filelist"
-	"github.com/takumin/gjson/internal/validate"
+	"github.com/takumin/gjson/internal/parser"
 )
 
 func NewCommands(cfg *config.Config, flags []cli.Flag) *cli.Command {
@@ -89,7 +89,7 @@ func action(cfg *config.Config) func(ctx *cli.Context) error {
 
 		var buf strings.Builder
 		for _, path := range paths {
-			res, err := validate.Validate(path)
+			res, err := parser.Parse(path)
 			if err != nil {
 				return err
 			}
