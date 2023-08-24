@@ -3,44 +3,19 @@ package parser
 import (
 	"bufio"
 	"encoding/json"
-	"fmt"
 	"os"
 	"path/filepath"
 )
 
-type rdjsonlPosition struct {
-	Line   int `json:"line,omitempty"`
-	Column int `json:"column,omitempty"`
-}
-
-type rdjsonlRange struct {
-	Start *rdjsonlPosition `json:"start,omitempty"`
-	End   *rdjsonlPosition `json:"end,omitempty"`
-}
-
-type rdjsonlLocation struct {
-	Path  string        `json:"path,omitempty"`
-	Range *rdjsonlRange `json:"range,omitempty"`
-}
-
-type rdjsonl struct {
-	Message  string           `json:"message,omitempty"`
-	Location *rdjsonlLocation `json:"location,omitempty"`
-	Severity string           `json:"severity,omitempty"`
-}
-
-type position struct {
+type ParseError struct {
 	Filename string
 	Offset   int
 	Line     int
 	Column   int
+	Message  string
 }
 
-func (pos *position) String() string {
-	return fmt.Sprintf("%s:%d:%d", pos.Filename, pos.Line, pos.Column)
-}
-
-func getPosition(file string, offset int) (pos *position, err error) {
+func getPosition(file string, offset int) (pos *ParseError, err error) {
 	fd, err := os.OpenFile(filepath.Clean(file), os.O_RDONLY, os.ModePerm)
 	if err != nil {
 		return nil, err
@@ -69,7 +44,7 @@ func getPosition(file string, offset int) (pos *position, err error) {
 		c = n
 	}
 
-	pos = &position{
+	pos = &ParseError{
 		Filename: filepath.Clean(file),
 		Offset:   offset,
 		Line:     l,
@@ -79,7 +54,7 @@ func getPosition(file string, offset int) (pos *position, err error) {
 	return pos, nil
 }
 
-func Parse(file string) ([]byte, error) {
+func Parse(file string) (*ParseError, error) {
 	data, err := os.ReadFile(filepath.Clean(file))
 	if err != nil {
 		return nil, err
@@ -108,25 +83,7 @@ func Parse(file string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+	pos.Message = errjson.Error()
 
-	rdjsonl := rdjsonl{
-		Message: errjson.Error(),
-		Location: &rdjsonlLocation{
-			Path: file,
-			Range: &rdjsonlRange{
-				Start: &rdjsonlPosition{
-					Line:   pos.Line,
-					Column: pos.Column,
-				},
-			},
-		},
-		Severity: "ERROR",
-	}
-
-	buf, err := json.Marshal(rdjsonl)
-	if err != nil {
-		return nil, err
-	}
-
-	return buf, nil
+	return pos, nil
 }

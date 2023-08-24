@@ -12,6 +12,7 @@ import (
 	"github.com/takumin/gjson/internal/config"
 	"github.com/takumin/gjson/internal/filelist"
 	"github.com/takumin/gjson/internal/parser"
+	"github.com/takumin/gjson/internal/report"
 )
 
 func NewCommands(cfg *config.Config, flags []cli.Flag) *cli.Command {
@@ -87,16 +88,25 @@ func action(cfg *config.Config) func(ctx *cli.Context) error {
 			}
 		}
 
-		var buf strings.Builder
+		perrs := make([]*parser.ParseError, 0, len(paths))
 		for _, path := range paths {
-			res, err := parser.Parse(path)
+			perr, err := parser.Parse(path)
 			if err != nil {
 				return err
 			}
-			if res != nil {
-				buf.Write(res)
-				buf.WriteString("\n")
+			if perr != nil {
+				perrs = append(perrs, perr)
 			}
+		}
+
+		var buf strings.Builder
+		for _, perr := range perrs {
+			res, err := report.ReviewdogDiagnosticJSONLines(perr.Filename, perr.Message, perr.Line, perr.Column)
+			if err != nil {
+				return err
+			}
+			buf.Write(res)
+			buf.WriteString("\n")
 		}
 
 		if buf.Len() > 0 {
