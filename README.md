@@ -4,6 +4,20 @@ Golang JSON Tool
 [![CI](https://github.com/takumin/gjson/actions/workflows/integration.yml/badge.svg)](https://github.com/takumin/gjson/actions/workflows/integration.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/takumin/gjson)](https://goreportcard.com/report/github.com/takumin/gjson)
 
+## Install
+
+### GitHub Releases
+
+Download a prebuilt binary from [GitHub Releases](https://github.com/takumin/gjson/releases) and install it in $PATH.
+
+### aqua
+
+[aqua](https://aquaproj.github.io/) is a CLI Version Manager.
+
+```bash
+aqua g -i takumin/gjson
+```
+
 ## usage
 
 ```
