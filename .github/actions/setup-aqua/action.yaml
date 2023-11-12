@@ -11,7 +11,7 @@ runs:
       path: ${{ steps.cache-dir.outputs.aqua }}
       key: aqua-tools-${{ runner.os }}-${{ hashFiles('**/.aqua.yaml') }}
   - name: Setup Aqua
-    uses: aquaproj/aqua-installer@v2.1.3
+    uses: aquaproj/aqua-installer@v2.2.0
     with:
       aqua_version: v2.16.4
       aqua_opts: -a
