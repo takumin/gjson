@@ -22,7 +22,7 @@ runs:
   # Setup Go
   ################################################################################
   - name: Setup Go
-    uses: actions/setup-go@v4
+    uses: actions/setup-go@v5
     with:
       go-version-file: ${{ inputs.go-mod }}
       cache: ${{ inputs.cache }}
