@@ -16,7 +16,7 @@ type ParseError struct {
 }
 
 func getPosition(file string, offset int) (pos *ParseError, err error) {
-	fd, err := os.OpenFile(filepath.Clean(file), os.O_RDONLY, os.ModePerm)
+	fd, err := os.OpenFile(filepath.Clean(file), os.O_RDONLY, 0600)
 	if err != nil {
 		return nil, err
 	}
