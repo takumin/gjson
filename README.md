@@ -25,10 +25,10 @@ NAME:
    gjson - Golang JSON Tool
 
 USAGE:
-   gjson [global options] command [command options] [arguments...]
+   gjson [global options] command [command options]
 
 VERSION:
-   dev (a39580b79e5739d9872728be106d5c051f8ed51f)
+   v0.0.3 (2e32198281acb1308e1b50abd7675ce9e116329c)
 
 COMMANDS:
    completion                      command completion
@@ -36,9 +36,9 @@ COMMANDS:
    help, h                         Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
-   --help, -h                   show help (default: false)
    --log-level value, -l value  log level [$LOG_LEVEL]
-   --version, -v                print the version (default: false)
+   --help, -h                   show help
+   --version, -v                print the version
 ```
 
 ## validate
@@ -48,11 +48,11 @@ NAME:
    gjson validation - json file validation
 
 USAGE:
-   gjson validation [command options] [arguments...]
+   gjson validation command [command options] [file or directory...]
 
 OPTIONS:
-   --directory value, -d value  search base directory (default: ".") [$DIRECTORY]
-   --excludes value, -e value  exclude files extensions (default: "invalid.json.golden") [$EXCLUDES]
-   --includes value, -i value  include files extensions (default: "json,json.golden") [$INCLUDES]
-   --log-level value, -l value  log level [$LOG_LEVEL]
+   --log-level value, -l value                              log level [$LOG_LEVEL]
+   --include value, -i value [ --include value, -i value ]  include file extension (default: "**/*.json", "**/*.json.golden") [$INCLUDE]
+   --exclude value, -e value [ --exclude value, -e value ]  exclude file extension (default: "**/*.invalid.json", "**/*.invalid.json.golden", "**/node_modules/**") [$EXCLUDE]
+   --help, -h                                               show help
 ```
