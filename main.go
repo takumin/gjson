@@ -26,6 +26,7 @@ func main() {
 		config.Includes("**/*.json.golden"),
 		config.Excludes("**/*.invalid.json"),
 		config.Excludes("**/*.invalid.json.golden"),
+		config.Excludes("**/node_modules/**"),
 	)
 
 	flags := []cli.Flag{
