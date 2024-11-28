@@ -12,6 +12,9 @@ runs:
     with:
       path: ${{ steps.cache-dir.outputs.aqua }}
       key: aqua-tools-${{ runner.os }}-${{ hashFiles('**/.aqua.yaml') }}
+  - name: Allow Local Registry
+    shell: bash
+    run: echo "AQUA_POLICY_CONFIG=${{ github.workspace }}/.aqua-policy.yaml" >> $GITHUB_ENV
   - name: Setup Aqua
     uses: aquaproj/aqua-installer@f13c5d2f0357708d85477aabe50fd3f725528745 # v3.1.0
     with:
