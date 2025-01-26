@@ -3,7 +3,7 @@ module github.com/takumin/gjson
 go 1.23.4
 
 require (
-	github.com/bmatcuk/doublestar/v4 v4.8.0
+	github.com/bmatcuk/doublestar/v4 v4.8.1
 	github.com/urfave/cli/v2 v2.27.5
 )
 
