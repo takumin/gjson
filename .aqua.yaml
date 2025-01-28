@@ -16,7 +16,7 @@ packages:
 - name: mvdan/sh@v3.10.0
 - name: koalaman/shellcheck@v0.10.0
 - name: rhysd/actionlint@v1.7.7
-- name: rust-lang/mdBook@v0.4.43
+- name: rust-lang/mdBook@v0.4.44
 - name: takumin/gjson@v0.0.3
 - name: aquasecurity/trivy@v0.58.2
 - name: takumin/gyaml@v0.0.2
