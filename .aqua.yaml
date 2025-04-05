@@ -9,7 +9,7 @@ registries:
   path: .aqua-registry.yaml
 packages:
 - name: honnef.co/go/tools/cmd/staticcheck
-  version: 2024.1.1 # renovate: depName=dominikh/go-tools
+  version: 2025.1.1 # renovate: depName=dominikh/go-tools
   registry: local
 - name: goreleaser/goreleaser@v2.8.2
 - name: securego/gosec@v2.22.3
