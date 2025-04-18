@@ -7,7 +7,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/takumin/gjson/internal/config"
 	"github.com/takumin/gjson/internal/filelist"
