@@ -11,7 +11,7 @@ packages:
 - name: honnef.co/go/tools/cmd/staticcheck
   version: 2025.1.1 # renovate: depName=dominikh/go-tools
   registry: local
-- name: goreleaser/goreleaser@v2.8.2
+- name: goreleaser/goreleaser@v2.9.0
 - name: securego/gosec@v2.22.3
 - name: reviewdog/reviewdog@v0.20.3
 - name: mvdan/sh@v3.11.0
