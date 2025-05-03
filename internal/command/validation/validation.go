@@ -1,13 +1,14 @@
 package validation
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"slices"
 	"sort"
 	"strings"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/takumin/gjson/internal/config"
 	"github.com/takumin/gjson/internal/filelist"
@@ -17,23 +18,19 @@ import (
 
 func NewCommands(cfg *config.Config, flags []cli.Flag) *cli.Command {
 	flags = append(flags, []cli.Flag{
-		&cli.MultiStringFlag{
-			Target: &cli.StringSliceFlag{
-				Name:    "include",
-				Aliases: []string{"i"},
-				Usage:   "include file extension",
-				EnvVars: []string{"INCLUDE"},
-			},
+		&cli.StringSliceFlag{
+			Name:        "include",
+			Aliases:     []string{"i"},
+			Usage:       "include file extension",
+			Sources:     cli.EnvVars("INCLUDE"),
 			Value:       cfg.Extention.Includes,
 			Destination: &cfg.Extention.Includes,
 		},
-		&cli.MultiStringFlag{
-			Target: &cli.StringSliceFlag{
-				Name:    "exclude",
-				Aliases: []string{"e"},
-				Usage:   "exclude file extension",
-				EnvVars: []string{"EXCLUDE"},
-			},
+		&cli.StringSliceFlag{
+			Name:        "exclude",
+			Aliases:     []string{"e"},
+			Usage:       "exclude file extension",
+			Sources:     cli.EnvVars("EXCLUDE"),
 			Value:       cfg.Extention.Excludes,
 			Destination: &cfg.Extention.Excludes,
 		},
@@ -50,19 +47,19 @@ func NewCommands(cfg *config.Config, flags []cli.Flag) *cli.Command {
 	}
 }
 
-func before(cfg *config.Config) func(ctx *cli.Context) error {
-	return func(ctx *cli.Context) error {
-		if ctx.NArg() > 0 {
-			s := ctx.Args().Slice()
+func before(cfg *config.Config) func(ctx context.Context, cmd *cli.Command) (context.Context, error) {
+	return func(ctx context.Context, cmd *cli.Command) (context.Context, error) {
+		if cmd.NArg() > 0 {
+			s := cmd.Args().Slice()
 			sort.Strings(s)
 			cfg.Path.Searches = slices.Compact(s)
 		}
-		return nil
+		return ctx, nil
 	}
 }
 
-func action(cfg *config.Config) func(ctx *cli.Context) error {
-	return func(ctx *cli.Context) error {
+func action(cfg *config.Config) func(ctx context.Context, cmd *cli.Command) error {
+	return func(ctx context.Context, cmd *cli.Command) error {
 		paths := make([]string, 0, 65535)
 		for _, path := range cfg.Path.Searches {
 			info, err := os.Stat(path)

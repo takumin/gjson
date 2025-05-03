@@ -1,7 +1,7 @@
 package completion
 
 import (
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/takumin/gjson/internal/command/completion/bash"
 	"github.com/takumin/gjson/internal/command/completion/fish"
@@ -18,9 +18,9 @@ func NewCommands(cfg *config.Config, flags []cli.Flag) *cli.Command {
 		powershell.NewCommands(cfg, flags),
 	}
 	return &cli.Command{
-		Name:        "completion",
-		Usage:       "command completion",
-		Subcommands: cmds,
-		HideHelp:    true,
+		Name:     "completion",
+		Usage:    "command completion",
+		Commands: cmds,
+		HideHelp: true,
 	}
 }
