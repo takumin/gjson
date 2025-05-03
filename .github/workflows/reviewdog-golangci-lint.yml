@@ -1,4 +1,4 @@
-name: Reviewdog (staticcheck)
+name: Reviewdog (golangci-lint)
 on:
   workflow_call:
     inputs:
@@ -6,13 +6,13 @@ on:
         type: string
         required: false
         description: 'A jobname passed from the caller workflow'
-        default: 'reviewdog-staticcheck'
+        default: 'reviewdog-golangci-lint'
   pull_request:
     paths:
     - '.github/actions/setup-go/action.yaml'
     - '.github/actions/setup-aqua/action.yaml'
     - '.github/actions/setup-reviewdog/action.yaml'
-    - '.github/workflows/reviewdog-staticcheck.yml'
+    - '.github/workflows/reviewdog-golangci-lint.yml'
     - '.aqua.yaml'
     - '.reviewdog.yml'
     - 'go.mod'
@@ -41,6 +41,6 @@ jobs:
       id: reviewdog
       uses: ./.github/actions/setup-reviewdog
     - name: Reviewdog
-      run: reviewdog -runners 'staticcheck' -reporter '${{ steps.reviewdog.outputs.reporter }}' -diff 'git diff FETCH_HEAD' -fail-on-error
+      run: reviewdog -runners 'golangci-lint' -reporter '${{ steps.reviewdog.outputs.reporter }}' -diff 'git diff FETCH_HEAD' -fail-on-error
       env:
         REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}

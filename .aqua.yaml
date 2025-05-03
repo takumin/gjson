@@ -1,16 +1,11 @@
----
 # aqua - Declarative CLI Version Manager
 # https://aquaproj.github.io/
 registries:
 - type: standard
   ref: v4.359.0 # renovate: depName=aquaproj/aqua-registry
-- name: local
-  type: local
-  path: .aqua-registry.yaml
 packages:
-- name: honnef.co/go/tools/cmd/staticcheck
-  version: 2025.1.1 # renovate: depName=dominikh/go-tools
-  registry: local
+- name: golang/go@go1.24.2
+- name: golangci/golangci-lint@v2.1.5
 - name: goreleaser/goreleaser@v2.9.0
 - name: securego/gosec@v2.22.3
 - name: reviewdog/reviewdog@v0.20.3

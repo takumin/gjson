@@ -23,7 +23,7 @@ runs:
   - name: Reviewdog Reporter Type
     id: reporter
     shell: bash
-    run: |
+    run: |-
       case "${{ github.event_name }}" in
       "push" )                echo "type=github-check" >> $GITHUB_OUTPUT ;;
       "pull_request" )        echo "type=github-pr-review" >> $GITHUB_OUTPUT ;;
