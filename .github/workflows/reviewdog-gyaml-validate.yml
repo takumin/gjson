@@ -9,7 +9,6 @@ on:
         default: 'reviewdog-gyaml-validate'
   pull_request:
     paths:
-    - '.github/actions/setup-go/action.yaml'
     - '.github/actions/setup-aqua/action.yaml'
     - '.github/actions/setup-reviewdog/action.yaml'
     - '.github/workflows/reviewdog-gyaml-validate.yml'
@@ -32,8 +31,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-    - name: Setup Go
-      uses: ./.github/actions/setup-go
     - name: Setup Aqua
       uses: ./.github/actions/setup-aqua
     - name: Setup Reviewdog
