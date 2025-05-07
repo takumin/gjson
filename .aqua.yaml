@@ -17,5 +17,5 @@ packages:
 - name: takumin/gjson@v0.0.3
 - name: aquasecurity/trivy@v0.62.1
 - name: takumin/gyaml@v0.0.2
-- name: editorconfig-checker/editorconfig-checker@v3.2.1
+- name: editorconfig-checker/editorconfig-checker@v3.3.0
 - name: google/yamlfmt@v0.16.0
