@@ -1,6 +1,6 @@
 module github.com/takumin/gjson
 
-go 1.24.4
+go 1.24.5
 
 require (
 	github.com/bmatcuk/doublestar/v4 v4.8.1
