@@ -4,5 +4,5 @@ go 1.24.6
 
 require (
 	github.com/bmatcuk/doublestar/v4 v4.9.1
-	github.com/urfave/cli/v3 v3.4.0
+	github.com/urfave/cli/v3 v3.4.1
 )
