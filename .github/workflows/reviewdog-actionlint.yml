@@ -33,7 +33,7 @@ jobs:
     - name: Setup Aqua
       uses: aquaproj/aqua-installer@ea518c135a02fc11ff8024364510c181a5c6b342 # v4.0.3
       with:
-        aqua_version: v2.53.11
+        aqua_version: v2.54.0
         aqua_opts: --exclude-tags golang
     - name: Setup Go
       uses: actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00 # v6.0.0
