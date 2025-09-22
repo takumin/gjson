@@ -9,7 +9,7 @@ packages:
   - golang
 - name: golangci/golangci-lint@v2.5.0
 - name: goreleaser/goreleaser@v2.12.2
-- name: securego/gosec@v2.22.8
+- name: securego/gosec@v2.22.9
 - name: reviewdog/reviewdog@v0.21.0
 - name: mvdan/sh@v3.12.0
 - name: koalaman/shellcheck@v0.11.0
