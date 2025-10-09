@@ -15,7 +15,7 @@ packages:
 - name: koalaman/shellcheck@v0.11.0
 - name: rhysd/actionlint@v1.7.7
 - name: takumin/gjson@v0.0.3
-- name: aquasecurity/trivy@v0.67.0
+- name: aquasecurity/trivy@v0.67.1
 - name: takumin/gyaml@v0.0.2
 - name: editorconfig-checker/editorconfig-checker@v3.4.0
 - name: google/yamlfmt@v0.17.2
