@@ -18,4 +18,4 @@ packages:
 - name: aquasecurity/trivy@v0.68.2
 - name: takumin/gyaml@v0.0.2
 - name: editorconfig-checker/editorconfig-checker@v3.6.0
-- name: google/yamlfmt@v0.20.0
+- name: google/yamlfmt@v0.21.0
